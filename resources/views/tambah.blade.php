@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Tambah Data Siswa - Sidas</title>
+    <title>Form Absensi Siswa - PenaHadir</title>
     <link rel="icon" type="image/png" href="{{ asset('sikabar.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
@@ -17,7 +17,7 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html">Sidas</a>
+        <a class="navbar-brand ps-3" href="index.html">PenaHadir</a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
                 class="fas fa-bars"></i></button>
@@ -52,29 +52,29 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" href="/layout">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Beranda
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link active" href="siswa">
+                        <a class="nav-link active" href="absen">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Data Siswa
+                            Data Absensi Siswa
                         </a>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    Sidas
+                    PenaHadir
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Form Tambah Data Siswa</h1>
+                    <h1 class="mt-4">Form Absensi Siswa</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Form Tambah Data Siswa</li>
+                        <li class="breadcrumb-item active">Form Absensi Siswa</li>
                     </ol>
                     <div class="card mb-4">
                         <div class="card-header">
@@ -82,52 +82,55 @@
                             Form Absen Siswa
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="{{ route('tambah.store') }}" method="POST">
+                                @csrf
                                 <div class="row mb-3">
                                     <label for="inputEmail3" class="col-sm-2 col-form-label fw-semibold">Nama
                                         Siswa</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputEmail3">
+                                        <input type="text" class="form-control" id="inputEmail3" name="nama_siswa">
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="tanggal_standar" class="form-label fw-semibold">Pilih
+                                <div class="row mb-3">
+                                    <label for="tanggal_standar" class="col-sm-2 col-form-label fw-semibold">Pilih
                                         Tanggal</label>
-                                    <input type="date" class="form-control" id="tanggal_standar" name="tanggal">
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" id="tanggal_standar" name="tanggal">
+                                    </div>
                                 </div>
-                                <label for="tanggal_standar" class="form-label fw-semibold">Pilih
-                                    Status Kehadiran</label><br>
+
+                                <label for="tanggal_standar" class="col-sm-2 col-form-label fw-semibold">Pilih
+                                    Status Kehadiran</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio1" value="option1">
+                                    <input class="form-check-input" type="radio" name="status" id="inlineRadio1"
+                                        value="hadir">
                                     <label class="form-check-label" for="inlineRadio1">Hadir</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio2" value="option2">
+                                    <input class="form-check-input" type="radio" name="status" id="inlineRadio2"
+                                        value="sakit">
                                     <label class="form-check-label" for="inlineRadio2">Sakit</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio3" value="option3">
+                                    <input class="form-check-input" type="radio" name="status" id="inlineRadio3"
+                                        value="izin">
                                     <label class="form-check-label" for="inlineRadio3">Izin</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                        id="inlineRadio4" value="option4">
+                                    <input class="form-check-input" type="radio" name="status" id="inlineRadio4"
+                                        value="alpa">
                                     <label class="form-check-label" for="inlineRadio4">Alpa</label>
                                 </div>
-                                <div class="row mb-3">
+                                <div class="row mb-3 mt-2">
                                     <label for="inputEmail3"
                                         class="col-sm-2 col-form-label fw-semibold">Keterangan</label>
                                     <div class="col-sm-10">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="keterangan"></textarea>
                                             <label for="floatingTextarea">Masukan Keterangan</label>
                                         </div>
                                     </div>
                                 </div>
-
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>

@@ -9,14 +9,12 @@ class KehadiranController extends Controller
 {
     public function index()
     {
-        // Mengambil data menggunakan Query Builder
-        $kehadiran = DB::table('attendances')->orderBy('tanggal', 'desc')->get();
+        $kehadiran = DB::table('kehadiran')->orderBy('tanggal', 'asc')->get();
         return view('layout', compact('kehadiran'));
     }
     public function redirect()
     {
-        // Mengambil data menggunakan Query Builder
-        $kehadiran = DB::table('attendances')->orderBy('tanggal', 'desc')->get();
+        $kehadiran = DB::table('kehadiran')->orderBy('tanggal', 'asc')->get();
         return view('absen', compact('kehadiran'));
     }
 
@@ -35,7 +33,7 @@ class KehadiranController extends Controller
         ]);
 
         // Memastikan keterangan tetap kosong (string kosong) jika tidak diisi
-        $keterangan = $request->filled('keterangan') ? $request->keterangan : '';
+        $keterangan = $request->filled('keterangan') ? $request->keterangan : '-';
 
         // Menyimpan data menggunakan Query Builder
         DB::table('kehadiran')->insert([
@@ -47,6 +45,6 @@ class KehadiranController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('layout')->with('success', 'Data absensi berhasil ditambahkan.');
+        return redirect()->route('absensi')->with('success', 'Data absensi berhasil ditambahkan.');
     }
 }
